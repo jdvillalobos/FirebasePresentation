@@ -1,3 +1,3 @@
 package com.example.firebasepresentation.model
 
-data class Movie(val name: String = "")
+data class Movie(val id: String = "", val name: String = "")
