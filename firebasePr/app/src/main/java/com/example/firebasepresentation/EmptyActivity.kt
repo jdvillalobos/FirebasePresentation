@@ -1,8 +1,8 @@
 package com.example.firebasepresentation
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.firebasepresentation.firebase.FirebaseManager
@@ -30,6 +30,7 @@ class EmptyActivity : AppCompatActivity() {
         }
     }
     
+    @SuppressLint("CheckResult")
     private fun setupObservables(){
         firebaseManager.changes("Movies", Movie::class.java)
             .subscribeOn(Schedulers.io())
@@ -65,6 +66,7 @@ class EmptyActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("CheckResult")
     private fun showNewMovieTextInputAlertDialog() {
         val alert = TextInputAlertDialog(this)
         alert.show(
@@ -82,6 +84,7 @@ class EmptyActivity : AppCompatActivity() {
             }
     }
 
+    @SuppressLint("CheckResult")
     private fun showModifyRoleTextInputAlertDialog(movie: Movie) {
         val alert = TextInputAlertDialog(this)
         alert.show(
