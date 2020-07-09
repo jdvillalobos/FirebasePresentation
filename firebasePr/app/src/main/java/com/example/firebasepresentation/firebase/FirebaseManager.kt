@@ -199,4 +199,54 @@ class FirebaseManager {
                 }
         }
     }
+
+    fun queriesExample() {
+        //Where Equals to
+        val starWarsMovie = firebaseDatabase.collection("Movies")
+            .whereEqualTo("name", "Star Wars")
+            .get()
+            .addOnSuccessListener {
+
+            }
+            .addOnFailureListener {
+
+            }
+
+        //Where Less Than or Equal to
+        val eightiesMovies = firebaseDatabase.collection("Movies")
+            .whereLessThanOrEqualTo("year", 1989)
+            .get()
+            .addOnSuccessListener {
+
+            }
+            .addOnFailureListener {
+
+            }
+
+        //Where Array Contains
+        val goodRates = firebaseDatabase.collection("Movies")
+            .whereArrayContains("rates", "Good")
+            .get()
+            .addOnSuccessListener {
+
+            }
+            .addOnFailureListener {
+
+            }
+
+
+        //Compound query
+        val firstStarWars = firebaseDatabase.collection("Movies")
+            .whereEqualTo("name", "Star Wars")
+            .whereEqualTo("year", 1977)
+            .get()
+            .addOnSuccessListener {
+
+            }
+            .addOnFailureListener {
+
+            }
+
+
+    }
 }
