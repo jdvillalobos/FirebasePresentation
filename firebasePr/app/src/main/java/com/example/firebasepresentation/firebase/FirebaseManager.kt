@@ -32,7 +32,7 @@ class FirebaseManager {
 
     fun <T> getObservable(firebaseKey: String, clazz: Class<out T>): Observable<List<T>> {
 
-        val observableDocuments = Observable.create<List<T>> { emitter ->
+        return Observable.create { emitter ->
             val collection: CollectionReference? = firebaseDatabase.collection(firebaseKey)
             collection?.let {
                 it.get()
@@ -52,7 +52,6 @@ class FirebaseManager {
                     }
             }
         }
-        return observableDocuments
     }
 
     fun <T> getWhereEqualsToObservable(
@@ -62,8 +61,8 @@ class FirebaseManager {
         clazz: Class<out T>
     ): Observable<List<T>> {
 
-        val observableDocuments = Observable.create<List<T>> { emitter ->
-            var collection: CollectionReference? = firebaseDatabase.collection(firebaseKey)
+        return Observable.create { emitter ->
+            val collection: CollectionReference? = firebaseDatabase.collection(firebaseKey)
 
             collection?.let {
                 it.whereEqualTo(field, equalsTo).get()
@@ -83,12 +82,11 @@ class FirebaseManager {
                     }
             }
         }
-        return observableDocuments
     }
 
     fun <T> changes(firebaseKey: String, clazz: Class<out T>): Observable<List<T>> {
-        val observableDocuments = Observable.create<List<T>> { emitter ->
-            var collection: CollectionReference? = firebaseDatabase.collection(firebaseKey)
+        return Observable.create { emitter ->
+            val collection: CollectionReference? = firebaseDatabase.collection(firebaseKey)
             val listener = collection?.addSnapshotListener { snapshot, _ ->
                 val values = mutableListOf<T>()
 
@@ -106,7 +104,6 @@ class FirebaseManager {
                 listener?.remove()
             }
         }
-        return observableDocuments
     }
 
     fun <T> changesWhereEqualsTo(
@@ -115,9 +112,8 @@ class FirebaseManager {
         equalsTo: Any,
         clazz: Class<out T>
     ): Observable<List<T>> {
-
-        val observableDocuments = Observable.create<List<T>> { emitter ->
-            var collection: CollectionReference? = firebaseDatabase.collection(firebaseKey)
+        return Observable.create { emitter ->
+            val collection: CollectionReference? = firebaseDatabase.collection(firebaseKey)
             val listener = collection?.addSnapshotListener { snapshot, _ ->
                 snapshot?.let {
                     it.query.whereEqualTo(field, equalsTo)
@@ -141,7 +137,6 @@ class FirebaseManager {
                 listener?.remove()
             }
         }
-        return observableDocuments
     }
 
     fun updateDocument(
