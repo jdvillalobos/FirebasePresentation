@@ -46,8 +46,7 @@ class EmptyActivity : AppCompatActivity() {
 
         moviesAdapter.getDeleteButtonClickedObservable()
             .observeOn(Schedulers.io())
-            .subscribe{
-                println("asdljhaskda")
+            .subscribe {
                 firebaseManager.delete("Movies", it.id)
                     .subscribe()
             }
